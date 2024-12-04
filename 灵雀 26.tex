@@ -1,0 +1,502 @@
+\documentclass[UTF8]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{unicode-math}
+\usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{longtable}
+\usepackage{fontspec}
+\usepackage[inline]{enumitem}
+\usepackage{multirow}
+\usepackage{xfrac}
+\usepackage{caption}
+\usepackage{stackengine}
+\usepackage{pgfmath}
+
+\newcommand{\q}{\quad}
+\newcommand{\s}{\symit}
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\u}{\symup}
+\newcommand{\E}{\times10^}
+\newcommand{\bs}{\symbfit}
+\newcommand{\bu}{\symbfup}
+\newcommand{\ud}{\underline}
+\newcommand{\rmf}{\rmfamily}
+\newcommand{\qq}{\ \ \ \ \ \ }
+\newcommand{\tg}[1]{$\left[\text{#1}\right]$\!\,}
+\newcounter{hxc} % hand example counter
+\newcommand{\hx}[1]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{7pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\par\rm}
+\newcommand{\hxsw}[2]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{7pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ 门风\ }\maj{#2}\rmf\par\rm}
+\newcommand{\hxo}[2]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{7pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ {#2}\ }\par\rm}
+\newcommand{\hxswo}[3]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{7pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ 门风\ }\maj{#2}\rmf\texttt{\ {#3}\ }\par\rm}
+\newcommand{\hxg}[1]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{-2.9pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\par\rm}
+\newcommand{\hxswg}[2]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{-2.9pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ 门风\ }\maj{#2}\rmf\par\rm}
+\newcommand{\hxog}[2]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{-2.9pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ {#2}\ }\par\rm}
+\newcommand{\hxswog}[3]{\vspace{1.5ex}\\\addtocounter{hxc}{1}\rm\hspace*{-2.9pt}\makebox[25pt][r]{\fsong\textbf{例}\rmf\ \textbf{\thehxc}\makebox[2.5pt][c]{}}\it\q\textrm{\maj{#1}\rmf}\texttt{\ 门风\ }\maj{#2}\rmf\texttt{\ {#3}\ }\par\rm}
+\newcommand{\hs}[1]{\fsong\textbf{计}\q{#1}\rmf}
+\newcommand{\hspg}[3]{\hspace*{11pt}\hsp{#1}{#2}{#3}}
+\newcommand{\mulii}[2]{\pgfmathparse{round(#1*#2)}\pgfmathprintnumber{\pgfmathresult}}
+\newcommand{\hsp}[3]{\fsong\textbf{计}\q{#1}，共${#2}$副${#3}$翻${\mulii{#2}{#3}}$点。\rmf}
+\newcommand{\stacktile}[1]{\stackon[-0.75pt]{#1}{#1}}
+\newcommand{\spg}[1]{\begin{samepage}{#1}\end{samepage}}
+
+\newCJKfontfamily{\fsong}[AutoFakeBold = {3.17}]{FangSong}
+\newfontfamily\maj{S.Mahjong}[Scale=2.27]
+\setitemize{itemindent=10pt}
+\setenumerate{itemindent=-10pt}
+\setenumerate{itemsep=-0.3ex}
+\setlength{\parskip}{0.3ex}
+\pgfkeys{/pgf/number format/.cd, set thousands separator={}}
+\geometry{a4paper}
+\geometry{left=2.4cm, right=2.4cm, top=3.1cm, bottom=3.1cm}
+
+\title{\textbf{灵雀}}
+\author{\textit{第二十六版}\texttt{（第二稿）}\rmf}
+\date{\textit{莫莫柴\q 甲辰年冬月初四}}
+
+\begin{document}
+  \maketitle
+  \section*{一\q 基本规则概述}
+  \subsection*{甲\q 牌张}
+  本规则采用常规$136$或$144$张麻雀牌。
+  \subsection*{乙\q 配牌}
+  手洗牌或使用机器洗牌均可，洗牌应均匀随机。配牌方式与一般规则（国标麻将、立直麻雀等，下同）大致相同，但应注意四家起手均只应摸13张牌。
+  \subsection*{丙\q 行牌}
+  行牌规则与一般规则大致相同，但有以下应格外注意之处：\vspace{-0.9ex}
+  \begin{enumerate}
+    \item\it 行牌从庄家（東家）摭牌（摸牌）开始。如果庄家直接舍牌（弃牌），会导致少牌。\rm
+    \item\it 任意时刻，只要一家可以舍牌，该家亦可以杠牌（限小明杠或暗杠）。\rm
+    \item\it 暗杠应在全部明出展示后暗置一至三张归入副露（而非四张均暗置）。\rm
+    \item\it 采用截和（头跳）制，只有一家能够和牌。\rm
+    \item\it 不设王张。\rm
+    \item\it 一家和牌后，一局结束。另外，若一家需要摭牌时，牌墙已被摭完，则亦结束，称为流局（荒庄）。\rm
+    \item\it 牌墙被摭完时，若当局尚未结束，仍可吃、碰、杠、和牌。\rm
+  \end{enumerate}
+  \subsection*{丁\q 和牌}
+  和牌点数（见第二章）不小于$10$点（达到$10$副$1$翻、$6$副$2$翻、或$3$翻以上），即可和牌。
+  \newpage
+  \section*{二\q 和牌点数}
+  \subsection*{甲\q 概述}
+  和牌点数可通过“$\text{总副数}\times\text{总翻数}$”的方式计算。其中，总副数为各番种副数之和；总翻数的计算方式见本章乙部分。若有花牌，则每张补出的花牌另计$2$点，不入起和。
+  
+  本章丙部分（第3页）给出各番种的定义、副数和翻数。对参与计分的每个番种，和牌必须满足该番种的定义。番种表中另加说明的情况（用“可加计……”表示）外，若一个番种是另一个番种的充分条件，或在番种表中明确指出二者互斥，则当前者参与计分时，后者不得参与计分（用“不计……”或“与……互斥”表示）。
+  
+  如未特殊说明，一次和牌中每种番种至多计入一次。单个番种计入多次时，副数相加，翻数不变。
+  
+  \subsection*{乙\q 翻数计算}
+  在和牌中计入的所有番种中，记单番翻数最大者为甲，其翻数为$f_0$；记在计入的与甲不同类的番种中单番翻数最大者为乙，其翻数为$f_1$。一般情况下，和牌翻数为$f_0$（即最大单番翻数）；满足以下两个条件中任一个时另加$1$翻（若都满足，则共另加$2$翻）：\\\begin{enumerate*}[itemjoin=\\]
+  \item $f_1>\sqrt{2f_0}$\it{，即，不同类的$3$翻与$3$翻复合、$4$翻与$3$或$4$翻复合、$5$翻与$4$或$5$翻复合、或$6$翻与$4$翻复合时在翻数最大者的基础上另加$1$翻；}
+  \item \it{和牌时处于没有吃、碰、明杠的状态，即门前清时无论如何都另加$1$翻（即使计入了“门前清”，或其他存在必然门前清的番种，该项依旧照常计）。}
+  \end{enumerate*}
+
+  \noindent 以上两种情况分别称为“复合跳翻”和“门清跳翻”。\vspace{1ex}
+  
+  \it{注：此时“番牌\ 门风牌”、“番牌\ 中”、“番牌\ 發”、“番牌\ 白”四个番牌番种视为同一个番种“番牌”。如果共有多于$1$个番牌刻子，则该番种翻数为番牌刻子个数；否则该番种仍视作$1$翻。例如，若有门风牌、中刻子各一，则$1$翻的“番牌\ 门风牌”、“番牌\ 中”番种合并为一个$2$翻的“番牌”番种。}\rm
+  
+  \newpage
+  
+  \subsection*{丙\q 番种表}
+  \textrm{本规则共有番种$76$种。}\par
+  \textit{注：下表内牌例仅作番种说明之用。未加说明时，牌例为他家放铳得和，其中风牌为客风。另外，由于和其他番种复合，或“门清跳翻”的原因，牌例的翻数并不总是与番种自身翻数相同；详见上页“翻数计算”部分，以及下文“常见问题与示例”中的“翻数计算问题”部分。}
+  \begin{itemize}
+    \item[\large\bf 0] \large{\bf\ 偶然类}\normalsize \begin{itemize}
+      \item[\bf 天和] \textit{和牌由庄家的$13$张配牌与第一张摭牌组成。计$48$副$3$翻。不计自摸、门前清。}
+      \item[\bf 地和] \textit{和牌由闲家的$13$张配牌与庄家的首张舍牌组成。庄家若在此之前已经暗杠，则地和不成立。计$48$副$3$翻。不计门前清。}
+      \item[\bf 岭上开花] \textit{和自家开杠后摭得的岭上牌。计$8$副$2$翻。不计自摸。可加计杠。}
+      \item[\bf 海底捞月] \textit{摭牌墙中最后一枚牌张得和。计$8$副$2$翻。不计自摸。}
+      \item[\bf 河底捞鱼] \textit{牌墙已被摭完时，他家放铳得和。计$8$副$2$翻。}
+      \item[\bf 抢杠] \textit{和别家加杠之牌。计$8$副$2$翻。}
+      \item[\bf 自摸] \textit{和自家摭得之牌。计$2$副$1$翻。}
+    \end{itemize}   
+    \item[\large\bf 1] \large{\bf\ 特殊类}\normalsize \begin{itemize}
+      \item[\bf 七对] \textit{由七个互不相同的对子组成的特殊和牌。计$8$副$3$翻。不计门前清。}
+        \hxg{ttddjjzbb4477\qq z}
+        \hspg{七对、番牌\ 中}{10}{4}
+      \item[\bf 全不靠] \textit{由以下$16$种牌张中的$14$种各一枚组成的特殊和牌：一色的$147$、另一色的$258$、剩余一色的$369$，以及七种字牌。计$8$副$3$翻。不计门前清。}
+        \hxg{wtiafjcn.1237\qq 4}
+        \hspg{全不靠}{8}{4}
+      \item[\bf 十三幺] \textit{由十三种幺九牌（一、九数牌及字牌）各一，加上任意一张幺九牌组成的特殊和牌。计$48$副$3$翻。不计混幺九、门前清。}
+        \hxg{qoalz.1234765\qq o}
+        \hspg{十三幺}{48}{4}
+        \hxg{qoal.12347765\qq z}
+        \hspg{十三幺、番牌\ 中}{50}{4}
+    \end{itemize}
+    \item[\large\bf 2] \large{\bf\ 副露类}\normalsize \begin{itemize}
+      \item[\bf 门前清] \textit{在听牌阶段手牌仅由自家摭牌构成并和牌。计$2$副$1$翻。}
+        \hxg{ggghjklcvbbnm\qq f}
+        \hspg{门前清、缺一门、连六}{8}{2}
+    \end{itemize}
+    \item[\large\bf 3] \large{\bf\ 刻、杠类}\normalsize \begin{itemize}
+      \item[\bf 四杠] \textit{和牌中有四个杠。计$96$副$5$翻。不计三杠、双杠、杠、对对和。}
+        \hxg{2--2r\stacktile{R}rbbbBg--g\qq 7\qq 7}
+        \hspg{四杠、双暗刻、番牌\ 中、客风刻、双同刻}{108}{5}
+      \item[\bf 三杠] \textit{和牌中有三个杠。计$32$副$4$翻。不计双杠、杠。}
+        \hxg{\stacktile{D}ddw--wjj\stacktile{J}\qq iivb\qq n}
+        \hspg{三杠、暗刻}{34}{4}
+      \item[\bf 双杠] \textit{和牌中有两个杠。计$8$副$2$翻。不计杠。}
+        \hxg{5\%55Cvb222@\qq tyyy\qq u}
+        \hspg{双杠、番牌\ 白、客风刻}{14}{2}
+      \item[\bf 杠] \textit{和牌中有一个杠。计$4$副$1$翻。}
+        \hxswg{v\stacktile{V}v\qq qwweer4466\qq 4}{4}
+        \hspg{杠、番牌\ 门风牌、番牌\ 發}{10}{1}
+      \item[\bf 四暗刻] \textit{和牌中有四个暗刻。计$48$副$3$翻。不计门前清、三暗刻、双暗刻、暗刻、对对和。}
+        \hxg{eeeuuugggxxxm\qq m}
+        \hspg{四暗刻}{48}{4}
+      \item[\bf 三暗刻] \textit{和牌中有三个暗刻。计$16$副$3$翻。不计双暗刻、暗刻。}
+        \hxg{h--h\qq eriiicc...\qq w}
+        \hspg{门前清、杠、三暗刻、幺九刻}{24}{4}
+      \item[\bf 双暗刻] \textit{和牌中有两个暗刻。计$4$副$2$翻。不计暗刻。}
+        \hxg{kKkHfg\qq vvvb666\qq b}
+        \hspg{双暗刻、番牌\ 發}{8}{2}
+      \item[\bf 暗刻] \textit{和牌中有一个暗刻。计$2$副$1$翻。}
+        \hxg{Nm,\qq rtysdhhhjj\qq f}
+        \hspg{暗刻、三色连环}{6}{2}
+      \item[\bf 对对和] \textit{和牌中有四副刻子。计$8$副$3$翻。}
+        \hxg{EeegGgxxX\qq 1155\qq 1}
+        \hspg{对对和、番牌\ 白、客风刻}{12}{3}
+      \item[\bf 四归] \textit{和牌中有一组不成杠的四枚相同牌张。计$4$副$1$翻。可计至多三次。}
+        \hxg{ssS\qq sdfghjmmm,\qq ,}
+        \hspg{暗刻、四归、缺一门、连六}{10}{1}
+        \hxg{RetUuu\qq tttyuvb\qq c}
+        \hspg{四归\!\,$\times2$、缺一门、喜相逢}{12}{1}
+    \end{itemize}
+    \item[\large\bf 4] \large{\bf\ 字牌类}\normalsize \begin{itemize}
+      \item[\bf 大七星] \textit{由七种字牌对子各一组成的七对和牌。计$128$副$5$翻。不计七对、门前清、字一色、四喜对、三元对、番牌。}
+        \hxg{1223344776655\qq 1}
+        \hspg{大七星}{128}{6}
+      \item[\bf 字一色] \textit{和牌仅由字牌组成。计$48$副$5$翻。不计混一色。可加计番牌、幺九刻。}
+        \hxg{1!133\#\qq 2266655\qq 5}
+        \hspg{暗刻、对对和、字一色、番牌\ 發、番牌\ 白、客风刻\!\,$\times2$}{70}{5}
+      \item[\bf 大四喜] \textit{和牌中有四风刻各一。计$96$副$5$翻。不计对对和、门风牌、客风刻、混一色。}
+        \hxg{@22\qq ss11133344\qq 4}
+        \hspg{双暗刻、大四喜}{100}{5}
+      \item[\bf 小四喜] \textit{和牌中四风齐备，其中三种成刻，余下一种作为雀头。计$48$副$5$翻。不计门风牌、客风刻、混一色。}
+        \hxg{11!\qq vbn2233444\qq 2}
+        \hspg{暗刻、小四喜}{50}{5}
+      \item[\bf 四喜对] \textit{同时包含四风对子的七对和牌。计$24$副$3$翻。可加计七对。不计门风牌。}
+        \hxg{ddffzz1123344\qq 2}
+        \hspg{七对、四喜对}{32}{5}
+      \item[\bf 大三元] \textit{和牌中有三元刻各一。计$48$副$4$翻。不计中、發、白。}
+        \hxg{7\&766\symbol{`\^}\qq rtvv555\qq y}
+        \hspg{暗刻、大三元}{50}{4}
+      \item[\bf 小三元] \textit{和牌中三元齐备，其中两种成刻，余下一种作为雀头。计$24$副$4$翻。不计中、發、白。}
+        \hxg{e\stacktile{E}eLjk\qq 7776655\qq 5}
+        \hspg{杠、暗刻、小三元}{30}{4}
+      \item[\bf 三元对] \textit{同时包含三元对子的七对和牌。计$12$副$3$翻。可加计七对。不计中、發、白。}
+        \hxg{ttyffbb776655\qq y}
+        \hspg{七对、三元对}{20}{5}
+        \item[\bf 番牌\ 门风牌] \textit{和牌中有门风牌刻子或对子。如果门风牌成刻，计$4$副$1$翻，否则计$2$副$1$翻。}
+        \hxswg{Ret\qq asddd22244\qq d}{2}
+        \hspg{双暗刻、四归、番牌\ 门风牌}{12}{2}
+      \item[\bf 番牌\ 中] \textit{和牌中有中刻子或对子。如果中成刻，计$4$副$1$翻，否则计$2$副$1$翻。}
+        \hxg{erttyufghbb77\qq 7}
+        \hspg{门前清、番牌\ 中}{6}{2}
+      \item[\bf 番牌\ 發] \textit{和牌中有發刻子或对子。如果發成刻，计$4$副$1$翻，否则计$2$副$1$翻。}
+        \hxg{Gfh\qq qwertysd66\qq a}
+        \hspg{番牌\ 發、镜龙会}{14}{3}
+      \item[\bf 番牌\ 白] \textit{和牌中有白刻子或对子。如果白成刻，计$4$副$1$翻，否则计$2$副$1$翻。}
+        \hxg{5--5Uyi\qq dfgcvbn\qq c}
+        \hspg{杠、暗刻、番牌\ 白}{10}{1}
+      \item[\bf 客风刻] \textit{和牌中有客风牌（除门风之外的风牌）刻子。计$2$副$1$翻。可计至多三次。}
+        \hxg{3\#3Hfg\qq fghvv11\qq 1}
+        \hspg{客风刻\!\,$\times2$、一般高}{8}{2}
+    \end{itemize}
+    
+    \item[\large\bf 5] \large{\bf\ 幺九类}\normalsize \begin{itemize}
+      \item[\bf 清幺九] \textit{和牌仅由一、九序数牌组成。计$96$副$5$翻。不计对对和、幺九刻、双同刻。}
+        \hxg{qQqll\stacktile{L}\qq ooozzz.\qq .}
+        \hspg{杠、双暗刻、清幺九}{104}{5}
+      \item[\bf 混幺九] \textit{和牌仅由一、九序数牌和字牌组成。计$24$副$3$翻。可加计番牌、幺九刻。}
+        \hxg{2\stacktile{@}2AaaoOo\qq zz66\qq 6}
+        \hspg{杠、对对和、番牌\ 發、客风刻、混幺九、幺九刻\!\,$\times2$}{46}{4}
+      \item[\bf 清带幺] \textit{和牌中有顺子，且雀头和每个面子皆含一、九序数牌。计$12$副$3$翻。}
+        \hxg{qqqwejklzzm,.\qq z}
+        \hspg{门前清、清带幺、幺九刻、喜相逢}{18}{4}
+      \item[\bf 混带幺] \textit{和牌中有顺子，雀头和每个面子皆含一、九序数牌或字牌，且一、九序数牌和字牌皆有。计$4$副$3$翻。}
+        \hxg{3--3Sad\qq ooom,.2\qq 2}
+        \hspg{杠、双暗刻、客风刻、混带幺、幺九刻}{16}{3}
+      \item[\bf 幺九刻] \textit{和牌中有一、九序数牌刻子。计$2$副$1$翻。可计至多四次。}
+        \hxg{qQqoOo\qq sdfghjk\qq g}
+        \hspg{幺九刻\!\,$\times2$、缺一门、九数贯通、镜数}{30}{4}
+    \end{itemize}
+    \item[\large\bf 6] \large{\bf\ 花色类}\normalsize \begin{itemize}
+      \item[\bf 九莲宝灯] \textit{立牌为同色的$1112345678999$（此时待牌为所有同色牌张），并和牌。计$128$副$5$翻。不计除偶然类番种外的所有其他番种。}
+        \hxg{qqqwertyuiooo\qq e}
+        \hspg{九莲宝灯}{128}{6}
+      \item[\bf 连七对] \textit{由同一花色连续七个序数的对子组成的七对和牌。计$96$副$5$翻。不计七对、门前清、清一色、镜数对。}
+        \hxg{ddffghhjjkkll\qq g}
+        \hspg{连七对}{96}{6}
+      \item[\bf 清一色] \textit{和牌仅由一色的序数牌组成。计$24$副$4$翻。不计混一色。}
+        \hxg{Cvb\qq xcvbnmmmm,\qq ,}
+        \hspg{暗刻、四归、清一色、连六}{32}{4}
+      \item[\bf 混一色] \textit{和牌中至多包含一种花色的序数牌。计$8$副$3$翻。}
+        \hxg{sddffgjk11177\qq h}
+        \hspg{门前清、番牌\ 中、客风刻、混一色、连六}{18}{4}
+      \item[\bf 缺一门] \textit{和牌仅由某两种花色的序数牌组成。计$2$副$1$翻。}
+        \hxg{Xcv\stacktile{K}kk\qq sdfvbnm\qq v}
+        \hspg{杠、缺一门、喜相逢、连六}{10}{1}
+    \end{itemize}
+    \item[\large\bf 7] \large{\bf\ 序数类}\normalsize \begin{itemize}
+      \item[\bf 二数] \textit{和牌仅由两种序数的序数牌组成。计$48$副$5$翻。不计对对和、双同刻。}
+      	\hxg{EeeyYy\qq ddhhhcc\qq c}
+        \hspg{暗刻、二数}{50}{5}
+      \item[\bf 三聚] \textit{和牌仅由连续的某三种序数的序数牌组成，且包含全部三个序数。计$24$副$3$翻。}
+      	\hxg{Wer\qq ssssdfxcvv\qq v}
+        \hspg{暗刻、四归、三聚、三色同顺}{38}{4}
+      \item[\bf 四聚] \textit{和牌仅由连续的某四种序数的序数牌组成，且包含全部四个序数。计$8$副$3$翻。}
+      	\hxg{TyuKhj\qq iiggnm,\qq g}
+        \hspg{四聚、喜相逢}{10}{3}
+      \item[\bf 九数贯通] \textit{和牌仅由序数牌组成，包含全部九个序数，且任意两个面子之间、面子和雀头之间都没有重复序数。计$12$副$3$翻。}
+        \hxg{rrrhjkllzxcbb\qq b}
+        \hspg{门前清、暗刻、九数贯通}{16}{4}
+    \end{itemize}
+    \item[\large\bf 8] \large{\bf\ 全体关联类}\normalsize \begin{itemize}
+      \item[\bf 镜数] \textit{仅由序数牌组成的、对称的一般形和牌。所谓“对称”即：存在一整数或半整数$q$，使得将和牌拆解为雀头和四个面子后，将每个部分的序数关于$q$镜像，仍是原和牌的一种拆解方式。此处面子的明与暗，刻子是否成杠均不作区分。计$12$副$3$翻。}
+        \hxg{eEeo--o\qq ghhhjnm\qq b}
+        \hspg{杠、暗刻、幺九刻、镜数、喜相逢}{22}{3}
+        \hxg{zzxxccbbmm,..\qq ,}
+        \hspg{门前清、清一色、镜数、二般高、双龙会}{70}{6}
+        \hxg{Gfh\qq wweerrttsd\qq a}
+        \hspg{缺一门、镜数、一般高、连六}{20}{3}
+      \item[\bf 镜数对] \textit{只含序数牌的、对称的七对和牌。所谓“对称”即：存在一整数$n$，使得将和牌中每个对子的序数关于$n$镜像后，仍是原来的和牌。计$24$副$3$翻。可加计七对。}
+        \hxg{eeyyoogghhjnn\qq j}
+        \hspg{七对、镜数对}{32}{5}
+        
+        \iffalse
+      \item[\bf 暗镜数] \textit{和牌没有吃、碰、杠（包括暗杠），仅由序数牌组成，不满足镜数或镜数七对，且牌张数量分布关于某个整数或半整数对称。所谓“对称”即：如果存在某个整数或半整数$q$，使得任意一种序数牌的数量和同花色的、序数与之关于$q$对称的序数牌的数量相同，那么和牌关于$q$对称。计$16$副$3$翻。不计门前清。}\vspace{1.5ex}\\
+        \maj wweerrttsdfgh\qq a\rmf\vspace{1.5ex}\\
+        \maj fghxxxcvbnm,,\qq ,\rmf\fi
+        
+    \iffalse
+        
+      \item[\bf 满庭芳] \textit{和牌仅由序数牌组成，其中每个面子均包含雀头的序数。计$16$副$3$翻。}\vspace{1.5ex}\\
+        \maj werffghcvvvvb\qq f\rmf
+    
+    \fi
+    
+    \end{itemize}
+    \item[\large\bf 9] \large{\bf\ 部分一致类}\normalsize \begin{itemize}
+      \item[\bf 四同顺] \textit{和牌中有四副同色同数的顺子。计$128$副$6$翻。不计四归、三同顺、二般高、一般高。}
+        \hxg{yyyyuuuuiiihh\qq i}
+        \hspg{门前清、缺一门、三聚、四同顺}{156}{7}
+      \item[\bf 三同顺] \textit{和牌中有三副同色同数的顺子。计$32$副$4$翻。不计一般高。}
+        \hxg{CvbVcb\qq weracvb\qq a}
+        \hspg{三同顺}{32}{4}
+      \item[\bf 二般高] \textit{和牌中有两组各两副同色同数的顺子。计$24$副$3$翻。不计一般高。}
+        \hxg{Uio\qq uioooffghh\qq g}
+        \hspg{四归、缺一门、二般高}{30}{3}
+      \item[\bf 一般高] \textit{和牌中有两副同色同数的顺子。计$4$副$2$翻。}
+        \hxg{llLeEe\qq zzxxccv\qq v}
+        \hspg{幺九刻、一般高}{6}{2}
+    \end{itemize}
+    \item[\large\bf 10]\large{\bf 部分关联类}\normalsize \begin{itemize}
+      \item[\bf 三同刻] \textit{和牌中有三副两两异色同数的刻子。计$24$副$3$翻。不计双同刻。}
+        \hxg{wWwsSss\qq zxxxcnn\qq x}
+        \hspg{杠、暗刻、四归、三同刻}{34}{3}
+      \item[\bf 双同刻] \textit{和牌中有两副异色同数的刻子。计$4$副$2$翻。当和牌中有两组各两副异色同数的刻子时，可计两次该番种。}
+        \hxg{tttsdfzxcbbb1\qq 1}
+        \hspg{门前清、双暗刻、双同刻}{10}{3}
+      \item[\bf 三色同顺] \textit{和牌中有三色三副同数的顺子。计$8$副$3$翻。不计喜相逢。}
+        \hxg{\&77Tyu\qq ghjbnmm\qq m}
+        \hspg{番牌\ 中、三色同顺}{12}{3}
+      \item[\bf 喜相逢] \textit{和牌中有两副异色同数的顺子。计$2$副$1$翻。与镜同互斥。当和牌中有两组各两副异色同数的顺子时，可计两次该番种。}
+        \hxg{qwetyuasdfgh6\qq 6}
+        \hspg{门前清、番牌\ 發、喜相逢、连六}{8}{2}
+      \item[\bf 三同二对] \textit{七对和牌中，每一个花色都有某两个序数的对子。计$24$副$3$翻。可加计七对。}
+        \hxg{qqeiiaakkzz,,\qq e}
+        \hspg{七对、三同二对}{32}{5}
+      \item[\bf 镜同] \textit{和牌中有两色序数牌各组成两副面子，其中对于一种花色的任一面子，在另一种花色中均有与之序数相同的面子。计$4$副$3$翻。与双龙会互斥。}
+        \hxg{Hgj\qq qwetyuadll\qq s}
+        \hspg{缺一门、喜相逢\!\,$\times2$、镜同}{10}{3}
+        \hxg{rrRYui\qq ffhjkvv\qq f}
+        \hspg{双同刻、喜相逢、镜同}{10}{3}
+      \item[\bf 镜同对] \textit{七对和牌中，有三个同花色的对子，且另一花色中有三个序数与它们相同的对子。计$16$副$3$翻。可加计七对。}
+        \hxg{eedggkkccbb,,\qq d}
+        \hspg{七对、镜同对}{24}{5}
+      \item[\bf 四连刻] \textit{和牌中有同色四副序数连续的刻子。计$64$副$4$翻。不计三连刻。}
+        \hxg{cc\stacktile{C}vVvNnn\qq bbbk\qq k}
+        \hspg{杠、暗刻、缺一门、四连刻}{72}{4}
+      \item[\bf 三连刻] \textit{和牌中有同色三副序数连续的刻子。计$24$副$3$翻。}
+        \hxg{WwweeEKjl\qq rr33\qq r}
+        \hspg{三连刻}{24}{3}
+      \item[\bf 四步高] \textit{和牌中有同色四副序数依次递增$1$的顺子。计$48$副$4$翻。不计三步高、连六。}
+        \hxg{SdfGfh\qq dfgghyy\qq j}
+        \hspg{缺一门、四步高}{50}{4}
+        \hxg{vvvbbbbnnnmmm\qq n}
+        \hspg{门前清、三暗刻、四归\!\,$\times2$、清一色、四聚、镜数、三连刻}{94}{6}
+      \item[\bf 三步高] \textit{和牌中有同色三副序数依次递增$1$的顺子。计$16$副$3$翻。与三连环互斥。}
+        \hxg{Tyu\qq yuuiiogg77\qq 7}
+        \hspg{番牌\ 中、三步高}{20}{3}
+        \hxg{wwdffggghhjjk\qq l}
+        \hspg{门前清、缺一门、三步高、连六}{22}{4}
+      \item[\bf 四连环] \textit{和牌中有同色四副序数依次递增$2$的顺子，即同色的$123$、$345$、$567$和$789$。计$32$副$4$翻。不计三连环、老少副。}
+        \hxg{Bcv\qq rrzxcbnmm.\qq ,}
+        \hspg{缺一门、四连环}{34}{4}
+      \item[\bf 三连环] \textit{和牌中有同色三副序数依次递增$2$的顺子。计$8$副$3$翻。与三步高互斥。}
+        \hxg{eevbsdffghhjk\qq c}
+        \hspg{门前清、三连环}{10}{4}
+      \item[\bf 一气贯通] \textit{和牌中有同色三副序数依次递增$3$的顺子，即同色的$123$、$456$和$789$。计$8$副$3$翻。与双龙会互斥。不计连六、老少副。}
+        \hxg{Rty4\$44\qq qweuiox\qq x}
+        \hspg{杠、客风刻、一气贯通}{14}{3}
+      \item[\bf 双龙会] \textit{和牌中有两组各两副同色且序数相差$3$的顺子，或两组各两副同色的$123$、$789$顺子。计$8$副$3$翻。与一气贯通互斥。不计连六、老少副。}
+        \hxg{wertyudfghk77\qq j}
+        \hspg{门前清、番牌\ 中、双龙会}{12}{4}
+        \hxg{Wqe\qq qweuuioohh\qq i}
+        \hspg{缺一门、二般高、双龙会}{34}{4}
+      \item[\bf 连六] \textit{和牌中有同色两副序数相差$3$的顺子。计$2$副$1$翻。与三色贯通互斥。}
+        \hxg{Ert\qq yuiaaahjkl\qq l}
+        \hspg{暗刻、幺九刻、缺一门、喜相逢、连六}{10}{1}
+      \item[\bf 老少副] \textit{和牌中有同色的$123$、$789$两副顺子。计$2$副$1$翻。与三色贯通互斥。}
+        \hxg{7\&77\qq fghjzxcm,.\qq f}
+        \hspg{杠、番牌\ 中、老少副}{10}{1}
+      \item[\bf 三色连刻] \textit{和牌中有三色三副序数依次递增$1$的刻子。计$8$副$2$翻。}
+        \hxg{tTtffF\qq hhjkccc\qq h}
+        \hspg{暗刻、三色连刻}{10}{3}
+      \item[\bf 三色步高] \textit{和牌中有三色三副序数依次递增$1$的顺子。计$4$副$2$翻。与三色连环互斥。}
+        \hxg{3\#3Ewr\qq adfgvbn\qq a\rmf}
+        \hspg{客风刻、三色步高}{6}{2}
+      \item[\bf 三色连环] \textit{和牌中有三色三副序数依次递增$2$的顺子。计$4$副$2$翻。与三色步高互斥。}
+        \hxg{Vbn\qq yuisdffghj\qq j}
+        \hspg{喜相逢、三色连环}{6}{2}
+      \item[\bf 三色贯通] \textit{和牌中有三色三副序数依次递增$3$的顺子，即一色的$123$、另一色的$456$和余下一种花色的$789$。计$8$副$2$翻。与连六、老少副互斥。}
+        \hxg{qweuiofghzxxc\qq x}
+        \hspg{门前清、喜相逢、三色贯通}{12}{3}
+      \item[\bf 镜龙会] \textit{和牌同时满足镜同和双龙会。计$12$副$3$翻。不计喜相逢、镜同、双龙会、连六、老少副。}
+        \hxg{Nbm\qq wertuffxcv\qq y}
+        \hspg{镜龙会}{12}{3}
+        \hxg{qweuioaaxcm,.\qq z}
+        \hspg{门前清、清带幺、镜龙会}{26}{5}
+    \end{itemize}
+    
+  \end{itemize}
+  \newpage
+  
+  \subsection*{丁\q 常见问题与示例}
+  \textit{注：本部分仅用于解释规则中的部分细节，不包含更多信息。}
+  \subsubsection*{1\q 翻数计算问题}
+  前述翻数计算方法可能不易理解；这里给出一种等价描述。计算翻数时，先找出每各番种类别中计入的最大番种的翻数；再从中选取至多两个，按照下表计算。
+  \begin{center}
+    \begin{tabular}{|c c|c c|}
+      \hline
+      \textbf{较大翻数$f_1$} & \textbf{较小翻数$f_2$} & \textbf{非门清计翻} & \textbf{门清计翻} \\
+      \hline
+      $3$ & $3$ & $4$ & $5$ \\
+      $4$ & $3$ & $5$ & $6$ \\
+      $4$ & $4$ & $5$ & $6$ \\
+      $5$ & $4$ & $6$ & $7$ \\
+      $5$ & $5$ & $6$ & $7$ \\
+      $6$ & $4$ & $7$ & $8$ \\
+      \hline
+      \multicolumn{2}{|c|}{\textit{其余情况}} & $f_1$ & $f_1+1$ \\
+      \hline
+    \end{tabular}
+    \captionof{table}{\textrm{翻数计算参照表}}
+  \end{center}
+  考虑以下和牌：
+  \hx{qweasdllzxc..\qq l}
+  \hsp{门前清、清带幺、幺九刻、三色同顺}{24}{5}\par
+  \noindent 例\thehxc 中，副露类番种的最大翻数为$1$（门前清）；幺九类番种的最大翻数为$3$（清带幺）；部分关联类番种的最大翻数为$3$（三色同顺）。和牌时处于门清状态，故按照上表，应计$5$翻。
+
+  另外应当注意，番牌（门风牌、中、發、白）刻子的翻数可以叠加。
+  \hxsw{qqwer11166555\qq 6}{1}
+  \hsp{门前清、双暗刻、番牌\ 门风牌、番牌\ 發、番牌\ 白、混一色}{26}{5}\par
+  \noindent 例\thehxc 中，字牌类的最大翻数为$1+1+1=3$（番牌\ 门风牌、番牌\ 發、番牌\ 白）；花色类的最大翻数为$3$（混一色）。和牌时处于门清状态，故按照上表，应计$5$翻。
+  \hxsw{7\stacktile{\&}7\qq 2266ghjxcv\qq 2}{2}
+  \hsp{杠、番牌\ 门风牌、番牌\ 中、番牌\ 發}{14}{2}\par
+  \noindent 例\thehxc 只有$2$翻，因为只有门风牌和中成刻，發只是雀头。
+
+  一般的和牌翻数在1--5翻之间，因为常见的番种翻数在1--4翻范围内：除清一色有$4$翻，三色贯通和三色连刻只有$2$翻外，从三色同顺到清一色之间的番种皆为$3$翻。
+
+  \subsubsection*{2\q 部分偶然类番种的复合问题}
+  本规则下，不设王张，故岭上开花可复合海底捞月。牌墙摭完时，仍可吃、碰、杠、和牌；因此，原则上讲，抢杠亦可复合河底捞鱼。然而，牌墙已被摭完时，加杠没有意义，故后一种情况比较少见。
+
+  \subsubsection*{3\q 暗刻的定义问题}
+  暗刻的定义为只由自己摭得牌张构成的刻子。一般而言，双碰听牌时，若他家放铳得和，则所和牌张构成刻子不为暗刻（除非手牌中已有三枚）；若自摸得和，所和牌张构成刻子为暗刻。暗杠亦算作暗刻的一种。
+  \hx{dddhhhvbn,,77\qq 7}
+  \hsp{门前清、双暗刻、番牌\ 中}{10}{3}
+  \hxo{Ewrq--q\qq ssxcvnnn\qq s}{自摸}
+  \hsp{自摸、杠、三暗刻、幺九刻、喜相逢}{26}{3}
+  \hxsw{3\#3\qq yyasddd444\qq d}{2}
+  \hsp{双暗刻、四归、客风刻\!\,$\times2$}{12}{2}
+  
+  \subsubsection*{4\q 三聚、四聚的定义问题}
+  本规则中，番种三聚、四聚分别要求和牌由连续的三种、四种序数的序数牌构成，且包含全部序数；因此，若中间缺少了某个序数，则不构成三聚、四聚。
+  \hx{eerrrrtttyyvv\qq t}
+  \hsp{门前清、四归\!\,$\times2$、缺一门、四聚、二般高}{44}{5}
+  \hx{yYyiIi\qq hhhkk..\qq k}
+  \hsp{暗刻、对对和、双同刻\!\,$\times2$、镜同}{22}{4}
+
+  \subsubsection*{5\q 镜数的定义问题}
+  镜数在番种表中的定义为“\it 仅由序数牌组成的、对称的一般形和牌。所谓‘对称’即：存在一整数或半整数$q$，使得将和牌拆解为雀头和四个面子后，将每个部分的序数关于$q$镜像，仍是原和牌的一种拆解方式。此处面子的明与暗，刻子是否成杠均不作区分。\rm”该定义可能不易理解；在此，特作进一步说明。
+  
+  镜数的一种常见情况是，$q$正好是构成雀头的牌张的序数；此时，要求每个花色中的面子的序数分布关于雀头的序数镜像对称。
+  \hxo{Sad\qq tjklxcvnm,\qq t}{（关于$5$对称）}
+  \hsp{镜数、老少副}{14}{3}
+  \hxo{tyuffhhkkkbnm\qq f}{（关于$6$对称）}
+  \hsp{门前清、暗刻、镜数、喜相逢}{18}{4}
+  \hxo{eEetTtt\qq qqsdddf\qq q}{（关于$3$对称）}
+  \hsp{杠、幺九刻、缺一门、镜数}{20}{3}
+  \hxo{zzxcvbbnm,...\qq z}{（关于$5$对称）}
+  \hsp{门前清、暗刻、幺九刻、清一色、九数贯通、镜数}{56}{6}
+  
+  镜数的另一种情况是，和牌存在两种不同的拆解方式，这两种拆解方式在序数上关于$q$镜像对称。此时，雀头的序数与$q$不同。
+  \hxo{ffF\qq zzzxvbnmmm\qq c}{（关于$4$对称）}
+  \hsp{暗刻、幺九刻、缺一门、镜数、连六}{20}{3}
+  
+  \noindent 上述和牌存在两种拆解方式：第一种是\vspace{1.2ex}\par
+  \maj fff\qq zzz\qq xcv\qq bnm\qq mm\rmf\par
+  \noindent 第二种是\vspace{1.2ex}\par
+  \maj fff\qq zxc\qq vbn\qq mmm\qq zz\rmf\par
+  \noindent 两种拆解方式在序数上关于$4$镜像对称，故满足镜数的条件。在计入其他番种时，若两种拆解方式点数不同，可按较高的一种计算；例如，例\thehxc 中，按第一种拆解方式计算，可以多计幺九刻的2副。
+  
+  这种形式的镜数和牌中，部分面子副露与否会影响镜数的成立。例如，若将例\thehxc 中的$456$索吃出，两种拆解方式将仅余一种，从而镜数不再成立。此外，这种形式的镜数还允许$q$为半整数：
+  \hxo{Ret\qq rtddffgghh\qq y}{（关于$4\,\sfrac{1}{2}$对称）}
+  \hsp{缺一门、四聚、镜数、一般高、喜相逢}{28}{4}
+
+  \subsubsection*{6\q 镜同、镜龙会与双同刻、喜相逢等番种的复合问题}
+  从定义上，镜同和牌必然包含喜相逢\!\,$\times2$，喜相逢和双同刻，或双同刻\!\,$\times2$。然而，镜同和牌不一定构成喜相逢，也不一定构成双同刻；因此，镜同可复合喜相逢、双同刻。另一方面，镜龙会和牌必然包含喜相逢\!\,$\times2$，故不计喜相逢。
+  \hx{Cvb\qq dffghvbnmm\qq g}
+  \hsp{缺一门、喜相逢$\times2$、镜同}{10}{3}
+  \hx{rrsdjklzxcm,.\qq a}
+  \hsp{门前清、镜龙会}{14}{4}
+
+  \subsubsection*{7\q 七对番种的复合问题}
+  除大七星、连七对外的七对和牌，即使有只在七对情况下成立的番种（如三元对），仍可计七对这一番种。另外，一般的番种，只要在定义中不显式或隐式地对和牌类别作要求（例如，明确写出需要“一般形和牌”，或在定义中提及面子、雀头等一般形和牌独有概念），也可以复合七对。
+  \hxsw{zzcvv44776655\qq c}{4}
+  \hsp{七对、三元对、番牌\ 门风牌、混一色}{30}{5}
+
+  \subsubsection*{8\q 和牌条件问题}
+  本规则中，和牌点数必须达到$10$点。为满足该条件，一般有以下几种方式：\vspace{-0.9ex}
+  \begin{enumerate}
+    \item \it 和牌满足$8$副$2$翻，或不低于$3$翻的番种，直接达到和牌条件。\rm
+    \item \it 和牌有两种以上的番牌刻子，直接达到和牌条件。\rm
+    \item \it 和牌满足，且不只满足某个$4$副$2$翻的番种（双暗刻、一般高、双同刻、三色步高、三色连环）。\rm
+    \item \it 在门前清状态下和牌，且除“门前清”外的番种有至少$4$副。\rm
+    \item \it 和牌总计至少$10$副。\rm
+  \end{enumerate}
+
+
+  \newpage
+  \section*{三\q 对局与计分}
+  \subsection*{甲\q 原始得分}
+  建议以全庄（$16$局）为单位进行游戏。每局游戏结束后，按照以下规则计分：
+
+  记和牌点数为$p$。若自摸和牌，则每家向和牌家支付$3p/2$分；若他家放铳得和，则铳家向和牌家支付$2p$分，其余两家向和牌家支付$p$分。若一家向和牌家通过放铳或被吃、碰、明杠等方式提供$4$枚牌张，则称此家“半包牌”，代其余两家支付他们本应支付分数之半（上取整）；若向和牌家提供$5$枚牌张，则称此家“全包牌”，代其余两家支付全部分数。
+  
+  例：北家自摸和牌，$10$副$3$翻$30$点。北家得$135$分；若无人包牌，则其余三家各失$45$分。若西家半包牌，则西家失$91$分，其余两家各失$22$分；若南家全包牌，则南家失$135$分，其余两家分数不变。
+
+  \subsection*{乙\q 约化分数}
+  约化分数是对一段时间内各家收支情况和排名的总结。当一个阶段的游戏结束后，可按照以下规则计算约化分数：
+
+  若共有$n$家，每家的原始得分为$s_i$，则每家的约化分数为
+  \[
+  S_i = \alpha(n)\sum_{1\leq j\leq n}\tanh\frac{s_j-s_i}{T_0\sqrt{n}},
+  \]
+  其中$T_0$为自定参数，一般可取为480；$\alpha$为与对局数有关的参数。
+
+  上述方法得到的约化分数同时考虑了顺位和原始得分因素。$T_0$越小，顺位的比重越高；$T_0$越大，原始得分的比重越高。
+
+  约化分数之法仅供参考，不作强制要求。
+\end{document}
